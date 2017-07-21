@@ -6,12 +6,13 @@ use Acme\TasksController;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Acme\Authorizer ;
+use Acme\taskRepository ;
 
 class TasksControllerSpec extends ObjectBehavior
 {
 
-    function let( \Acme\Authorizer $authorizer ){
-        $this->beConstructedWith( $authorizer ) ;
+    function let( \Acme\Authorizer $authorizer , \Acme\taskRepository $taskRepository ){
+        $this->beConstructedWith( $authorizer , $taskRepository ) ;
     }
 
     function it_is_initializable()
@@ -19,7 +20,7 @@ class TasksControllerSpec extends ObjectBehavior
         $this->shouldHaveType(TasksController::class);
     }
 
-    function it_disallows_guest_from_creating_tasks( \Acme\Authorizer $authorizer)
+    function it_disallows_guest_from_creating_tasks( \Acme\Authorizer $authorizer , \Acme\taskRepository $taskRepository)
     {
         $authorizer->guest()->willReturn( true ) ;
 
@@ -27,7 +28,14 @@ class TasksControllerSpec extends ObjectBehavior
         // I will assume it's array
         $task = ["name" => "task name" , "desc" => "task description"] ;
 
+
         $this->createTask( $task )->shouldReturn( "redirect" ) ;
+
+
+        $this->store( $task ) ;
+
+        // mock
+        $taskRepository->store( $task )->shouldBeCalled() ;
     }
 
 }
