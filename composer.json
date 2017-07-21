@@ -1,0 +1,20 @@
+{
+    "name": "phpspec-unit",
+    "description": "Unit testing using phpspec",
+    "keywords":["phpspec","phpspec unit testing" ,"phpspec examples"],
+    "authors": [
+        {
+            "name": "ahmed32ali",
+            "email": "dev.ahmed.abbas@gmail.com"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpspec/phpspec": "^3.4"
+    },
+    "autoload": {
+      "psr-4": {
+        "Acme\\": "src/"
+      }
+    }
+}
