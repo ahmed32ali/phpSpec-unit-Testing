@@ -5,6 +5,6 @@ namespace Acme\Parsers;
 class TagParser
 {
     public function parse( $string ){
-        return explode("," , $string );
+        return preg_split("/ ?[|,] ?/" , $string );
     }
 }

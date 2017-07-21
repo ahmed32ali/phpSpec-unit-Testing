@@ -18,4 +18,9 @@ class TagParserSpec extends ObjectBehavior
         $this->parse("welcome,ahmed,ali")->shouldReturn( ["welcome" ,"ahmed" ,"ali"] );
     }
 
+    function it_parsers_tags_spearated_by_comma_or_pipe_into_array()
+    {
+        $this->parse("welcome|ahmed,ali")->shouldReturn( ["welcome" ,"ahmed" ,"ali"] );
+    }
+
 }
